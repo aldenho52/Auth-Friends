@@ -1,15 +1,17 @@
-import React, { useEffect} from 'react'
+import React, { useState, useEffect} from 'react'
 import axiosWithAuth from '../utils/axiosWithAuth'
-import { Link } from 'react-router-dom'
-
+import { BrowserRouter as Router, Switch, Link } from 'react-router-dom'
+import AddFriend from './AddFriend'
+import PrivateRoute from './PrivateRoute'
 
 const FriendList = (props) => {
+    const [friends, setFriends] = useState([])
 
     const getData = () => {
         axiosWithAuth()
         .get('/friends')
         .then(res => {
-            props.setFriends(res.data)
+            setFriends(res.data)
         })
         .catch(err => {
             console.log(err)
@@ -21,12 +23,17 @@ const FriendList = (props) => {
     }, [])
 
     return (
+        <Router>
         <div>
         <Link to="/add_a_friend">Add Friend</Link>
-        {props.friends.map(friend => {
+        {friends.map(friend => {
             return <p key={friend.id}>{friend.name}</p>
         })}
+        <Switch>
+            <PrivateRoute exact path="/add_a_friend" component={AddFriend} />
+        </Switch>
         </div>
+        </Router>
     )
 }
 

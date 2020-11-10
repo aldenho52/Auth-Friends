@@ -1,27 +1,35 @@
-import React from 'react'
+import React, {useState} from 'react'
 import axiosWithAuth from '../utils/axiosWithAuth'
 
 const AddFriend = (props) => {
+  const [newFriend, setNewFriend] = useState({
+      id: Date.now(),
+      username: '',
+      email: '',
+      password: ''
+  })
 
     const handleChange = e => {
-        this.setState({
-            credentials: {
-            ...this.state.credentials,
-            [e.target.name]: e.target.value 
-            }
-            
+        // this.setState({
+        //     credentials: {
+        //     ...this.state.credentials,
+        //     [e.target.name]: e.target.value 
+        //     }
+        // })
+        setNewFriend({
+            ...newFriend,
+            [e.target.name]: e.target.value
         })
     }
 
     const createFriend = e => {
         e.preventDefault()
         axiosWithAuth()
-        .post('/friends', this.state.credentials)
+        .post('/friends', newFriend)
             .then(res => {
                 console.log(res)
-                localStorage.setItem('token', res.data.payload)
-                this.props.history.push('/protected')
-                this.props.setLoggedIn(true);
+                setFriends(res.data)
+                props.history.push('/protected')
             })
             .catch(err => {
                 console.log(err)
@@ -35,7 +43,7 @@ const AddFriend = (props) => {
             <input
             type="text"
             name="username"
-            value={this.state.credentials.username}
+            value={newFriend.username}
             onChange={handleChange}
         />
         </label>
@@ -43,7 +51,7 @@ const AddFriend = (props) => {
         <input
             type="email"
             name="email"
-            value={this.state.credentials.email}
+            value={newFriend.email}
             onChange={handleChange}
             />
         </label>
@@ -51,7 +59,7 @@ const AddFriend = (props) => {
         <input
             type="password"
             name="password"
-            value={this.state.credentials.password}
+            value={newFriend.password}
             onChange={handleChange}
             />
         </label>

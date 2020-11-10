@@ -5,17 +5,10 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 import FriendList from './components/FriendList'
 import Login from './components/Login'
 import PrivateRoute from './components/PrivateRoute'
-import AddFriend from './components/AddFriend'
 
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false);
-  const [newFriend, setNewFriend] = useState({
-      id: '',
-      username: '',
-      email: '',
-      password: ''
-  })
-  const [friends, setFriends] = useState([])
+
 
   const logout = () => {
         localStorage.removeItem("token");
@@ -36,15 +29,13 @@ function App() {
 
         <h1>Friends</h1>
         <Switch>
-        <PrivateRoute exact path ='/protected' render={(props)=>{
-          return <FriendList {...props} friends={friends} setFriends={setFriends} />
-        }}/>
+      
+        <PrivateRoute exact path ='/protected' component={FriendList} />
+    
         <Route exact path="/login" render={(props)=>{
           return <Login {...props} setLoggedIn={setLoggedIn} />
         }} />
-        <Route exact path="/add_a_friend" render={(props)=>{
-          return <AddFriend {...props} newFriend={newFriend} setNewFriend={setNewFriend} />
-        }} />
+
         <Route component={Login} />
         </Switch>
       </div>
@@ -53,3 +44,7 @@ function App() {
 }
 
 export default App;
+
+// <Route exact path="/add_a_friend" render={(props)=>{
+//   return <AddFriend {...props}  />
+// }} />
