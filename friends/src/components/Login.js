@@ -6,7 +6,7 @@ class Login extends React.Component {
         credentials: {
             username: '',
             password: ''
-        }
+        },
     }
 
     handleChange = e => {
@@ -26,7 +26,6 @@ class Login extends React.Component {
                 console.log(res)
                 localStorage.setItem('token', res.data.payload)
                 this.props.history.push('/protected')
-                this.props.setLoggedIn(true)
             })
             .catch(err => {
                 console.log(err)
