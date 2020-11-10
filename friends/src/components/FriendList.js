@@ -1,15 +1,15 @@
-import React, {useState, useEffect} from 'react'
+import React, { useEffect} from 'react'
 import axiosWithAuth from '../utils/axiosWithAuth'
+import { Link } from 'react-router-dom'
 
 
-const FriendList = () => {
-    const [friends, setFriends] = useState([])
+const FriendList = (props) => {
 
     const getData = () => {
         axiosWithAuth()
         .get('/friends')
         .then(res => {
-            setFriends(res.data)
+            props.setFriends(res.data)
         })
         .catch(err => {
             console.log(err)
@@ -22,7 +22,8 @@ const FriendList = () => {
 
     return (
         <div>
-        {friends.map(friend => {
+        <Link to="/add_a_friend">Add Friend</Link>
+        {props.friends.map(friend => {
             return <p key={friend.id}>{friend.name}</p>
         })}
         </div>
