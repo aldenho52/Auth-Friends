@@ -1,35 +1,34 @@
 import React, {useState} from 'react'
 import axiosWithAuth from '../utils/axiosWithAuth'
+import { useHistory } from 'react-router-dom'
+
+const initialFriend = {
+    name: '',
+    age: '',
+    email: ''
+}
 
 const AddFriend = (props) => {
-  const [newFriend, setNewFriend] = useState({
-      id: Date.now(),
-      username: '',
-      email: '',
-      password: ''
-  })
+    const { setFriends} = props
+    const { push } = useHistory()
+
+    const [newFriend, setNewFriend] = useState(initialFriend)
 
     const handleChange = e => {
-        // this.setState({
-        //     credentials: {
-        //     ...this.state.credentials,
-        //     [e.target.name]: e.target.value 
-        //     }
-        // })
         setNewFriend({
             ...newFriend,
             [e.target.name]: e.target.value
         })
     }
 
-    const createFriend = e => {
+    const handleSubmit = (e) => {
         e.preventDefault()
         axiosWithAuth()
         .post('/friends', newFriend)
             .then(res => {
                 console.log(res)
                 setFriends(res.data)
-                props.history.push('/protected')
+                push('/protected')
             })
             .catch(err => {
                 console.log(err)
@@ -38,28 +37,28 @@ const AddFriend = (props) => {
 
     return (
         <div>
-        <form onSubmit={createFriend}>
+        <form onSubmit={handleSubmit}>
         <label>Name:
             <input
             type="text"
-            name="username"
-            value={newFriend.username}
+            name="name"
+            value={newFriend.name}
             onChange={handleChange}
         />
         </label>
-        <label>Email:
+        <label>Age:
         <input
-            type="email"
-            name="email"
-            value={newFriend.email}
+            type="text"
+            name="age"
+            value={newFriend.age}
             onChange={handleChange}
             />
         </label>
-        <label>Password:
+        <label>Email:
         <input
-            type="password"
-            name="password"
-            value={newFriend.password}
+            type="text"
+            name="email"
+            value={newFriend.email}
             onChange={handleChange}
             />
         </label>
