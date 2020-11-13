@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 import FriendList from './components/FriendList'
 import Login from './components/Login'
 import AddFriend from './components/AddFriend'
+import EditForm from './components/EditForm'
 // import PrivateRoute from './components/PrivateRoute'
 import axiosWithAuth from './utils/axiosWithAuth'
 
@@ -61,7 +62,9 @@ function App(props) {
           return <AddFriend {...props} friends={friends} setFriends={setFriends} />
         }} />
 
-
+        <Route path='/edit-friend/:id' render={(props) => {
+          return <EditForm {...props} setFriends={setFriends}/>
+        }} />
 
         <Route component={Login} />
         </Switch>

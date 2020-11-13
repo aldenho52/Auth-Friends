@@ -1,12 +1,11 @@
 import React from 'react'
 import axiosWithAuth from '../utils/axiosWithAuth'
+import { useHistory } from 'react-router-dom';
 
 const Friend = props => {
     const {friend, setFriends} = props
+    const { push } = useHistory();
 
-    const editFriend = () => {
-
-    }
 
     const deleteFriend = () => {
         axiosWithAuth()
@@ -26,7 +25,9 @@ const Friend = props => {
             <p>Email: {friend.email}</p>
             <p>Age: {friend.age}</p>
             <div>
-                <button onClick={editFriend}>Edit</button>
+                <button onClick={() => {
+                    push(`/edit-friend/${friend.id}`)
+                }}>Edit</button>
                 <button onClick={deleteFriend}>Delete</button>
             </div>
         </div>
