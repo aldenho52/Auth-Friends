@@ -5,11 +5,12 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 import FriendList from './components/FriendList'
 import Login from './components/Login'
 import AddFriend from './components/AddFriend'
-// import PrivateRoute from './components/PrivateRoute'
+import PrivateRoute from './components/PrivateRoute'
 import axiosWithAuth from './utils/axiosWithAuth'
 
 
-function App() {
+function App(props) {
+  
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [friends, setFriends] = useState([])
 
@@ -36,19 +37,19 @@ function App() {
   return (
     <Router>
       <div className="App">
-        
+      
         <ul>
         {((!isLoggedIn) ? (<li> <Link to="/login">Login</Link></li>) : (<div></div>))}
-        <li>
-          <Link to="#" onClick={logout}>Logout</Link>
-        </li>
+
+        <Link to="/" onClick={logout}>Logout</Link>
+
         { ((isLoggedIn) ? (<li> <Link to="/protected">Friends</Link></li>) : (<div></div>)) }
         </ul>
 
         <h1>Friends</h1>
         <Switch>
       
-        <Route exact path ='/protected' render={(props)=> {
+        <PrivateRoute exact path ='/protected' render={(props)=> {
           return <FriendList {...props} friends={friends} getData={getData} setFriends={setFriends} />
         }} />
     
