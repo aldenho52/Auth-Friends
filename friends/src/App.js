@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 import FriendList from './components/FriendList'
 import Login from './components/Login'
 import AddFriend from './components/AddFriend'
-import PrivateRoute from './components/PrivateRoute'
+// import PrivateRoute from './components/PrivateRoute'
 import axiosWithAuth from './utils/axiosWithAuth'
 
 
@@ -49,8 +49,8 @@ function App(props) {
         <h1>Friends</h1>
         <Switch>
       
-        <PrivateRoute exact path ='/protected' render={(props)=> {
-          return <FriendList {...props} friends={friends} getData={getData} setFriends={setFriends} />
+        <Route exact path ='/protected' render={(props)=> {
+          return <FriendList {...props} friends={friends} getData={getData} setFriends={setFriends} /> 
         }} />
     
         <Route exact path="/login" render={(props)=>{
