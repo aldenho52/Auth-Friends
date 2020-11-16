@@ -50,7 +50,8 @@ const EditForm = props => {
     }
 
     return (
-        <div>
+        <div className='login-box'>
+            <h2>Edit Friend</h2>
             <form onSubmit={handleSubmit}>
             <label>Name:
                 <input

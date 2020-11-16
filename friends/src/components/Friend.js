@@ -20,11 +20,11 @@ const Friend = props => {
     }
 
     return (
-        <div>
+        <div className='friend-card'>
             <h3>{friend.name}</h3>
             <p>Email: {friend.email}</p>
             <p>Age: {friend.age}</p>
-            <div>
+            <div className='button-div'>
                 <button onClick={() => {
                     push(`/edit-friend/${friend.id}`)
                 }}>Edit</button>

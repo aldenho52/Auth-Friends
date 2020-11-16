@@ -41,7 +41,8 @@ function App(props) {
       <div className='nav-bar' >
         {((!isLoggedIn) ? ( <Link className='nav-link' to="/login">Login</Link>) : (<div></div>))}
 
-        <Link className='nav-link' to="/" onClick={logout}>Logout</Link>
+        {((isLoggedIn) ? ( <Link className='nav-link' to="/" onClick={logout}>Logout</Link>) : (<div></div>))}
+        
 
         { ((isLoggedIn) ? ( <Link className='nav-link' to="/protected">Friends</Link>) : (<div></div>)) }
       </div>

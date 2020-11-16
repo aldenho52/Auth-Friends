@@ -45,3 +45,45 @@ body {
 .login-box input {
   margin: 5%;
 }
+
+.addFriend-btn {
+  font-size: 1.5rem;
+  padding: 2%;
+  border-radius: 10px;
+}
+
+.addFriend-btn:hover {
+  background: lime;
+  transition-duration: 300ms;
+}
+
+.friends-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.friend-card {
+  background: lightgreen;
+  border: 3px solid black;
+  width: 25%;
+  padding: 3% 0%;
+  margin-top: 3%;
+}
+
+.button-div {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+  margin: 0 auto;
+  padding-top: 4%;
+}
+
+.button-div button {
+  font-size: 1.25rem;
+  padding: 5%;
+  border-radius: 10px;
+  background: lightskyblue;
+  color: aliceblue;
+}
