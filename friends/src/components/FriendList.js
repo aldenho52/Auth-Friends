@@ -9,10 +9,13 @@ const { push } = useHistory();
 
     return (
         <div>
-        <button onClick={()=>{push('/add-friend')}}>Add Friend</button>
+            <h1 className='title' >Friends</h1>
+            <button onClick={()=>{push('/add-friend')}}>Add Friend</button>
+        <div>
         {friends.map(friend => {
             return <Friend key={friend.id} friend={friend} setFriends={setFriends}/>
         })}
+        </div>
         </div>
     )
 }

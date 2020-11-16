@@ -28,7 +28,7 @@ function App(props) {
 
   useEffect(() => {
       getData()
-  }, [friends])
+  }, [])
 
   const logout = () => {
         localStorage.removeItem("token");
@@ -38,16 +38,15 @@ function App(props) {
   return (
     <Router>
       <div className="App">
-      
-        <ul>
-        {((!isLoggedIn) ? (<li> <Link to="/login">Login</Link></li>) : (<div></div>))}
+      <div className='nav-bar' >
+        {((!isLoggedIn) ? ( <Link className='nav-link' to="/login">Login</Link>) : (<div></div>))}
 
-        <Link to="/" onClick={logout}>Logout</Link>
+        <Link className='nav-link' to="/" onClick={logout}>Logout</Link>
 
-        { ((isLoggedIn) ? (<li> <Link to="/protected">Friends</Link></li>) : (<div></div>)) }
-        </ul>
+        { ((isLoggedIn) ? ( <Link className='nav-link' to="/protected">Friends</Link>) : (<div></div>)) }
+      </div>
 
-        <h1>Friends</h1>
+
         <Switch>
       
         <Route exact path ='/protected' render={(props)=> {
